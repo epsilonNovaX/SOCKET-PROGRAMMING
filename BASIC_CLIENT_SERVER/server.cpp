@@ -5,7 +5,7 @@
 #include<string.h>
 #define PORT 8080
 using namespace std;
-int main()
+int main(int argc, const char * argv[])
 {
     return 0;
 }
