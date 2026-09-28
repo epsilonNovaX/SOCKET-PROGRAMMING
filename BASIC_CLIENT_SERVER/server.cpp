@@ -14,5 +14,15 @@ int main(int argc, const char * argv[])
     char buffer[1024]={0};
     char * hello="Hello from server";
     socklen_t addrlen=sizeof(address);
+    if((serverFd=socket(AF_INET,SOCK_STREAM,0))<0)
+    {
+        cerr<<"\n SOCKET FAILED";
+        exit(EXIT_FAILURE);
+    }
+    if(setsockopt(serverFd,SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt,sizeof(opt)))
+    {
+        cerr<<"\nsetsockopt";
+        exit(EXIT_FAILURE);
+    }
     return 0;
 }
