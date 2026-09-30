@@ -24,5 +24,19 @@ int main(int argc, const char * argv[])
         cerr<<"\nsetsockopt";
         exit(EXIT_FAILURE);
     }
+    address.sin_family=AF_INET;
+    address.sin_addr.s_addr=INADDR_ANY;
+    address.sin_port=htons(PORT);
+    if(bind(serverFd,(sockaddr *) &address,sizeof(address))<0)
+    {
+        cerr<<"[BIND ERROR]";
+        exit(EXIT_FAILURE);
+    }
+    if(listen(serverFd,3)<0)
+    {
+        cerr<<"[LISTENING ERROR]";
+        exit(EXIT_FAILURE);
+    }
+    
     return 0;
 }
