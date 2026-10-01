@@ -37,6 +37,16 @@ int main(int argc, const char * argv[])
         cerr<<"[LISTENING ERROR]";
         exit(EXIT_FAILURE);
     }
-    
+    if((newSocket=accept(serverFd,(sockaddr *)&address, & addrlen))<0)
+    {
+        cerr<<"[ACCEPT ERROR]";
+        exit(EXIT_FAILURE);
+    }
+    valread=read(newSocket,buffer,1024-1);
+    cout<<"\n"<<buffer;
+    send(newSocket,hello,strlen(hello),0);
+    cout<<"\n [MESSAGE SENT FROM SERVER] ";
+    close(newSocket);
+    close(serverFd);
     return 0;
 }
